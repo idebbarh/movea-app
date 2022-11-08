@@ -90,6 +90,8 @@ body{
   padding: 25px 50px;
   height: 100vh;
   width: fit-content;
+  display: flex;
+  flex-direction: column;
 }
 .side-bar::before{
   content: '';
@@ -111,24 +113,33 @@ body{
   color: var(--main-blue-color);
 }
 .side-bar--pages-links{
-  margin-top: 100px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 40px;
+  flex: 1;
+  justify-content: center;
 }
 .pages-links--link{
   list-style: none;
+  text-decoration: none;
   padding: 15px 20px;
   width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
   color: var(--side-bar-text-color);
-  /* active */
-  background-color: var(--main--glass-blue-color);
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   border-radius: 15px;
+}
+.pages-links--link.active,
+.pages-links--link:hover{
+    background-color: var(--main--glass-blue-color);
 }
 .pages-links--link::before{
   content: '';
@@ -137,8 +148,11 @@ body{
   top: 0;
   height: 100%;
   width: 20px;
-  background-color: var(--main-blue-color);
   border-radius: 40px;
+}
+.pages-links--link.active::before,
+.pages-links--link:hover::before{
+  background-color: var(--main-blue-color);
 }
 .link--icon{
   color: var(--side-bar-icons-color);

@@ -5,7 +5,7 @@ function Pages() {
   return (
     <div className='pages'>
         <Routes>
-            <Route path='/' element={<Home pageTitle='Random Movies'/>}/>
+            <Route path='/home' element={<Home pageTitle='Random Movies'/>}/>
             <Route path='/popular' element={<Home pageTitle='Popular Movies'/>}/>
             <Route path='/top-rated' element={<Home pageTitle='Top Rated Movies'/>}/>
             <Route path='/upcoming' element={<Home pageTitle='Upcoming Movies'/>}/>

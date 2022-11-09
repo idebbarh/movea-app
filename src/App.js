@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import Pages from "./pages/Pages";
 import { BrowserRouter } from "react-router-dom";
-import {ApiProvider} from "./ApiContext";
+import {ApiProvider} from "./MoviesPagesContext";
 
 function App() {
   

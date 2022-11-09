@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {AiFillHome} from 'react-icons/ai'
 import {BiCameraMovie} from 'react-icons/bi'
 import {AiFillStar} from 'react-icons/ai'
@@ -6,9 +6,9 @@ import {RiMovie2Fill} from 'react-icons/ri'
 import {MdFavorite} from 'react-icons/md'
 import {motion} from 'framer-motion'
 import {useContext} from 'react'
-import ApiContext from '../ApiContext'
+import MoviesPagesContext from '../MoviesPagesContext'
 function SideBarLinks(props) {
-  const {selectedPage,setSelectedPage} = useContext(ApiContext)
+  const {selectedPage,setSelectedPage} = useContext(MoviesPagesContext)
   return (
     <ul className="side-bar--pages-links">
         <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}}>

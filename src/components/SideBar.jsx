@@ -10,7 +10,7 @@ function SideBar() {
                 Movea
             </h3>
         </div>
-        <SideBarLinks />
+        <SideBarLinks/>
     </div>
   )
 }

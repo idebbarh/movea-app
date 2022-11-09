@@ -1,32 +1,34 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {AiFillHome} from 'react-icons/ai'
 import {BiCameraMovie} from 'react-icons/bi'
 import {AiFillStar} from 'react-icons/ai'
 import {RiMovie2Fill} from 'react-icons/ri'
 import {MdFavorite} from 'react-icons/md'
-import {NavLink} from 'react-router-dom'
 import {motion} from 'framer-motion'
-function SideBarLinks() {
+import {useContext} from 'react'
+import ApiContext from '../ApiContext'
+function SideBarLinks(props) {
+  const {selectedPage,setSelectedPage} = useContext(ApiContext)
   return (
     <ul className="side-bar--pages-links">
         <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}}>
-          <NavLink className={`pages-links--link ${({isActive})=> isActive && 'active'}`} to={'/home'}><AiFillHome className='link--icon'/>Home</NavLink>
+          <li className={`pages-links--link ${selectedPage === 'home' && 'active'}`} onClick={()=>setSelectedPage('home')}><AiFillHome className='link--icon'/>Home</li>
         </motion.div>
 
         <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}}>
-          <NavLink className={`pages-links--link ${({isActive})=> isActive && 'active'}`} to={'/popular'}><BiCameraMovie className='link--icon'/>Popular</NavLink>
+          <li className={`pages-links--link ${selectedPage === 'popular' && 'active'}`} onClick={()=>setSelectedPage('popular')}><BiCameraMovie className='link--icon'/>Popular</li>
         </motion.div>
 
         <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}}>
-          <NavLink className={`pages-links--link ${({isActive})=> isActive && 'active'}`} to={'/top-rated'}><AiFillStar className='link--icon'/>Top Rated</NavLink>
+          <li className={`pages-links--link ${selectedPage === 'top rated' && 'active'}`} onClick={()=>setSelectedPage('top rated')}><AiFillStar className='link--icon'/>Top Rated</li>
         </motion.div>
 
         <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}}>
-          <NavLink className={`pages-links--link ${({isActive})=> isActive && 'active'}`} to={'/upcoming'}><RiMovie2Fill className='link--icon'/>Upcoming</NavLink>
+          <li className={`pages-links--link ${selectedPage === 'upcoming' && 'active'}`} onClick={()=>setSelectedPage('upcoming')}><RiMovie2Fill className='link--icon'/>Upcoming</li>
         </motion.div>
         
         <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}}>
-          <NavLink className={`pages-links--link ${({isActive})=> isActive && 'active'}`} to={'/favorite'}><MdFavorite className='link--icon'/>Favorite</NavLink>
+          <li className={`pages-links--link ${selectedPage === 'favorite' && 'active'}`}><MdFavorite className='link--icon'/>Favorite</li>
         </motion.div>
     </ul>
   )

@@ -136,6 +136,7 @@ body{
   position: relative;
   overflow: hidden;
   border-radius: 15px;
+  cursor: pointer;
 }
 .pages-links--link.active,
 .pages-links--link:hover{

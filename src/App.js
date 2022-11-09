@@ -3,18 +3,23 @@ import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import Pages from "./pages/Pages";
 import { BrowserRouter } from "react-router-dom";
+import {ApiProvider} from "./ApiContext";
+
 function App() {
+  
   return (
     <div className="App">
-      <BrowserRouter>
-        <div className="all-contents">
-          <Header />
-          <div className="main">
-            <Pages />
+    <ApiProvider>
+        <BrowserRouter>
+          <div className="all-contents">
+            <Header />
+            <div className="main">
+              <Pages/>
+            </div>
           </div>
-        </div>
-        <SideBar />
-      </BrowserRouter>
+          <SideBar/>
+        </BrowserRouter>
+      </ApiProvider>
     </div>
   );
 }

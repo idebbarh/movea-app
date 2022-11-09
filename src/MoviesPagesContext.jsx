@@ -1,6 +1,5 @@
 import { createContext,useEffect,useState } from "react";
 
-
 const MoviesPagesContext = createContext()
 const apiKey = process.env.REACT_APP_API_KEY
 const apiPerPageCat = {
@@ -12,7 +11,6 @@ const apiPerPageCat = {
 
 export function ApiProvider({children}){
     const [selectedPage,setSelectedPage] = useState('home');
-    const [curApi,setCurApi] = useState(apiPerPageCat[selectedPage])
     const [genreId,setGenreId] = useState({})
     useEffect(()=>{
         getAllCategories()
@@ -26,15 +24,10 @@ export function ApiProvider({children}){
         data.genres.forEach(g=>{
             genreToId = {...genreToId,[g.name]:g.id}
         })
-        console.log(genreToId)
         setGenreId(genreToId)
     }
-
-    useEffect(()=>{
-        setCurApi(apiPerPageCat[selectedPage] !== undefined ? apiPerPageCat[selectedPage] : `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=1&with_genres=${genreId[selectedPage]}`)
-    },[selectedPage])
     return (
-        <MoviesPagesContext.Provider value={{selectedPage:selectedPage,setSelectedPage:setSelectedPage,curApiUrl:curApi}}>
+        <MoviesPagesContext.Provider value={{selectedPage:selectedPage,setSelectedPage:setSelectedPage,curApiUrl:apiPerPageCat[selectedPage] !== undefined ? apiPerPageCat[selectedPage] : `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=1&with_genres=${genreId[selectedPage]}`}}>
             {children}
         </MoviesPagesContext.Provider>
     )

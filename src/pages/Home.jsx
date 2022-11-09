@@ -6,6 +6,7 @@ import MovieCard from '../components/MovieCard';
 import LandingMovie from '../components/LandingMovie';
 import Categories from '../components/Categories';
 import {motion} from 'framer-motion'
+import {nanoid} from 'nanoid'
 function Home() {
   const [moviesData,setMoviesData] = useState([]);
   const {selectedPage,curApiUrl} = useContext(MoviesPagesContext);
@@ -24,7 +25,7 @@ function Home() {
     setMoviesData(data.results)
   }
   const cardsElem = moviesData.map(card=>{
-            return <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}} key={card.id}>
+            return <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}} key={nanoid()}>
                       <MovieCard movieData={card}/>
                     </motion.div>
        

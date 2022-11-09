@@ -164,7 +164,8 @@ body{
   padding: 25px 50px;
 }
 .landing{
-
+  display: flex;
+  gap: 50px;
 }
 .landing-movie{
   position: relative;
@@ -208,7 +209,7 @@ body{
 }
 .movies-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
 }
 .movies-grid--movie-card{
@@ -242,3 +243,7 @@ body{
   font-size: 15px;
 }
 /* End Main */
+
+.splide__slide.is-visible.is-active{
+  color: var(--main-blue-color);
+}

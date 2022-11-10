@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef} from "react";
 import MoviesPagesContext from "../MoviesPagesContext";
 import { nanoid } from "nanoid";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 function Categories() {
   const [allCategories, setAllCategories] = useState([]);
-  const { selectedPage, setSelectedPage } = useContext(MoviesPagesContext);
+  const { selectedPage, setSelectedPage,spliderRef } = useContext(MoviesPagesContext);
+  const pageRef = useRef(selectedPage)
   const splideIndexToGenre = {
-    0: selectedPage,
     1: "Action",
     2: "Adventure",
     3: "Animation",
@@ -36,6 +36,9 @@ function Categories() {
       getAllCategories();
     }
   }, []);
+  useEffect(()=>{
+    pageRef.current = selectedPage;
+  },[selectedPage])
   const getAllCategories = async () => {
     const res = await fetch(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
@@ -46,13 +49,15 @@ function Categories() {
   };
   const getSlidePage = (elem) => {
     const index = elem.index;
-    if (index === 0) {
-    //   setSelectedPage("home");
-    } else {
+    if (index !== 0) {
       setSelectedPage(splideIndexToGenre[index]);
+    }else{
+      if(!['home','popular','top rated','upcoming','favorite'].includes(pageRef.current)){
+        setSelectedPage('home');
+      }
     }
   };
-  const catoriesLinksElem = allCategories.map((categ, i) => {
+  const catoriesLinksElem = allCategories.map((categ) => {
     return (
       <SplideSlide key={nanoid()}>
         <div className="categoris-link">{categ.name}</div>
@@ -64,6 +69,7 @@ function Categories() {
       <h3 className="categories--title">Category</h3>
       <div className="categories-selector">
         <Splide
+          ref={spliderRef}
           options={{
             rewind: true,
             autoWidth: true,
@@ -79,7 +85,7 @@ function Categories() {
             trimSpace: false,
             // updateOnMove:true,
           }}
-          onActive={(event, elem) => getSlidePage(elem)}
+          onActive={(event, elem) => getSlidePage(elem)} 
         >
           {[
             <SplideSlide key={nanoid()}>
@@ -88,6 +94,7 @@ function Categories() {
             ...catoriesLinksElem,
           ]}
         </Splide>
+
       </div>
     </div>
   );

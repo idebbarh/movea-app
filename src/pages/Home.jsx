@@ -11,6 +11,8 @@ function Home() {
   const [moviesData,setMoviesData] = useState([]);
   const {selectedPage,curApiUrl} = useContext(MoviesPagesContext);
   useEffect(()=>{
+    console.log(selectedPage)
+    console.log(curApiUrl)
     const moviesFromLocalStorage = localStorage.getItem(selectedPage)
     if(moviesFromLocalStorage){
       setMoviesData(JSON.parse(moviesFromLocalStorage))

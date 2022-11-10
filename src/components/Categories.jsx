@@ -76,7 +76,7 @@ function Categories() {
             direction: "ttb",
             perPage: 3,
             focus: "center",
-            heightRatio: 5,
+            height:'100%',
             type: "slide",
             cover: true,
             pagination: false,

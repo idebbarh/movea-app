@@ -38,7 +38,6 @@ function Categories() {
   }, []);
   useEffect(()=>{
     pageRef.current = selectedPage;
-    console.log(`its change ${pageRef.current}`)
   },[selectedPage])
   const getAllCategories = async () => {
     const res = await fetch(
@@ -54,9 +53,7 @@ function Categories() {
       setSelectedPage(splideIndexToGenre[index]);
     }else{
       setTimeout(()=>{
-        console.log(`before ${pageRef.current}`)
         if(!['home','popular','top rated','upcoming','favorite'].includes(pageRef.current)){
-          console.log(`after ${pageRef.current}`)
           setSelectedPage('home');
         }
       },300)

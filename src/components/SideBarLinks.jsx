@@ -42,11 +42,11 @@ function SideBarLinks() {
         </motion.div>
       </Link>
 
-      <Link to={'/'}>
+    {localStorage.getItem('favoriteMovies') && JSON.parse(localStorage.getItem('favoriteMovies')).length > 0 && <Link to={'/'}>
         <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}}>
           <li className={`pages-links--link ${selectedPage === 'favorite' && 'active'}`}><MdFavorite className='link--icon'/>Favorite</li>
         </motion.div>
-      </Link>
+      </Link>}
 
     </ul>
   )

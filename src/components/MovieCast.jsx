@@ -1,7 +1,7 @@
 import React from 'react'
 
 function MovieCast(props) {
-    console.log(props.castInfos)
+    
   return (
     <div className='cast'>
         <div className="cast--image">

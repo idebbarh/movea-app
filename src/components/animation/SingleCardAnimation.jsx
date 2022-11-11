@@ -10,7 +10,8 @@ function SingleCardAnimation({index,children}) {
                     exit={{ y: -10, opacity: 0 }}
                     transition={{ delay: index/10 }}
                     >
-            <motion.div whileHover={{scale:1.1}} whileTap={{scale:0.9}}>
+            <motion.div whileHover={{scale:1.1}}
+                        whileTap={{scale:0.9}}>
                 {children}
             </motion.div>
         </motion.div>

@@ -16,6 +16,9 @@ body{
   background-color: var(--main-background-color);
   font-family: 'Inter', sans-serif;
 }
+a{
+  text-decoration: none;
+}
 .all-contents{
   padding-left: 246px;
 }
@@ -121,7 +124,6 @@ body{
 }
 .pages-links--link{
   list-style: none;
-  text-decoration: none;
   padding: 15px 20px;
   width: 100%;
   display: flex;
@@ -136,7 +138,6 @@ body{
   position: relative;
   overflow: hidden;
   border-radius: 15px;
-  cursor: pointer;
 }
 .pages-links--link.active,
 .pages-links--link:hover{

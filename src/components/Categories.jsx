@@ -38,6 +38,7 @@ function Categories() {
   }, []);
   useEffect(()=>{
     pageRef.current = selectedPage;
+    console.log(`its change ${pageRef.current}`)
   },[selectedPage])
   const getAllCategories = async () => {
     const res = await fetch(
@@ -47,14 +48,18 @@ function Categories() {
     localStorage.setItem("allCategories", JSON.stringify(data.genres));
     setAllCategories(data.genres);
   };
-  const getSlidePage = (elem) => {
+  const getSlidePage = async (elem) => {
     const index = elem.index;
     if (index !== 0) {
       setSelectedPage(splideIndexToGenre[index]);
     }else{
-      if(!['home','popular','top rated','upcoming','favorite'].includes(pageRef.current)){
-        setSelectedPage('home');
-      }
+      setTimeout(()=>{
+        console.log(`before ${pageRef.current}`)
+        if(!['home','popular','top rated','upcoming','favorite'].includes(pageRef.current)){
+          console.log(`after ${pageRef.current}`)
+          setSelectedPage('home');
+        }
+      },300)
     }
   };
   const catoriesLinksElem = allCategories.map((categ) => {

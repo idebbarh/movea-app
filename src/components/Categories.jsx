@@ -1,12 +1,14 @@
-import React, { useEffect, useState, useContext, useRef} from "react";
-import MoviesPagesContext from "../MoviesPagesContext";
+import React, { useEffect, useState, useContext, useRef } from "react";
+import MoviesPagesContext from "./providers/MoviesPagesContext";
 import { nanoid } from "nanoid";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 function Categories() {
   const [allCategories, setAllCategories] = useState([]);
-  const { selectedPage, setSelectedPage,spliderRef } = useContext(MoviesPagesContext);
-  const pageRef = useRef(selectedPage)
+  const { dispatch,spliderRef,selectedPage,genreToId } =
+    useContext(MoviesPagesContext);
+  const pageRef = useRef(selectedPage);
+  const genreToIdRef = useRef(genreToId)
   const splideIndexToGenre = {
     1: "Action",
     2: "Adventure",
@@ -28,6 +30,7 @@ function Categories() {
     18: "War",
     19: "Western",
   };
+  
   useEffect(() => {
     const categoriesFromLocalStorage = localStorage.getItem("allCategories");
     if (categoriesFromLocalStorage) {
@@ -36,9 +39,13 @@ function Categories() {
       getAllCategories();
     }
   }, []);
-  useEffect(()=>{
+
+  useEffect(() => {
     pageRef.current = selectedPage;
-  },[selectedPage])
+  }, [selectedPage]);
+  useEffect(()=>{
+    genreToIdRef.current = genreToId;
+  },[genreToId])
   const getAllCategories = async () => {
     const res = await fetch(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
@@ -49,15 +56,21 @@ function Categories() {
   };
   const getSlidePage = async (elem) => {
     const index = elem.index;
-    if (index !== 0) {
-      setSelectedPage(splideIndexToGenre[index]);
-    }else{
-      setTimeout(()=>{
-        if(!['home','popular','top rated','upcoming','favorite'].includes(pageRef.current)){
-          setSelectedPage('home');
-        }
-      },300)
-    }
+    if(pageRef.current !== splideIndexToGenre[index]){
+      if (index !== 0) {
+        dispatch({type:'genres',payload:{selectedPage:splideIndexToGenre[index],genreToId:genreToIdRef.current}})
+      } else {
+        setTimeout(() => {
+          if (
+            !["home", "popular", "top rated", "upcoming", "favorite"].includes(
+              pageRef.current
+            )
+          ) {
+            dispatch({type:'category',payload:{selectedPage:'home',genreToId:''}});
+          }
+        }, 300);
+      }
+  }
   };
   const catoriesLinksElem = allCategories.map((categ) => {
     return (
@@ -78,7 +91,7 @@ function Categories() {
             direction: "ttb",
             perPage: 3,
             focus: "center",
-            height:'100%',
+            height: "100%",
             type: "slide",
             cover: true,
             pagination: false,
@@ -87,7 +100,7 @@ function Categories() {
             trimSpace: false,
             // updateOnMove:true,
           }}
-          onActive={(event, elem) => getSlidePage(elem)} 
+          onActive={(event, elem) => getSlidePage(elem)}
         >
           {[
             <SplideSlide key={nanoid()}>
@@ -96,7 +109,6 @@ function Categories() {
             ...catoriesLinksElem,
           ]}
         </Splide>
-
       </div>
     </div>
   );

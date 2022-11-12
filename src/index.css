@@ -27,6 +27,7 @@ a{
   padding: 25px 50px;
   display: flex;
   align-items: center;
+  text-transform: capitalize;
 }
 .header--mode-switcher{
   display: flex;

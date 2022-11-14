@@ -468,7 +468,5 @@ width: 100%;
 .cast--info .cast--character{
   color: var(--main-white-color);
 }
-.movie-info--similar-movies{
-  height: 40vh;
-}
+
 /* End Movie Info */

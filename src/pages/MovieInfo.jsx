@@ -5,6 +5,7 @@ import {MdFavorite} from 'react-icons/md'
 import {BsFillPlayFill} from 'react-icons/bs'
 import MovieCast from '../components/MovieCast'
 import MoviesPagesContext from '../components/providers/MoviesPagesContext'
+import SimilarMovies from '../components/SimilarMovies'
 function MovieInfo() {
     const {id:movie_id} = useParams();
     const [movieInfo,setMovieInfo] = useState(null);
@@ -88,7 +89,7 @@ function MovieInfo() {
         }
       setTimeout(()=>{
         spliderRef.current.go(parseInt(index));
-      },100)
+      },300)
     }
   return (
     <div className='movie-info'>
@@ -128,6 +129,7 @@ function MovieInfo() {
                 {castsElem}
               </div>
             </div>
+          <SimilarMovies id={movie_id}/>
         </div>
       </div>
     </div>

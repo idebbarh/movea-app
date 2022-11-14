@@ -225,16 +225,17 @@ a{
 height: 100%;
 width: 100%;
 }
-.splide {
+
+.categories .splide {
   height: 100%;
 }
-.splide__track{
+.categories .splide__track{
   height: 100%;
 }
-.splide__list{
+.categories .splide__list{
   height: 100%;
 }
-.splide__list >*{
+.categories .splide__list >*{
   display: flex;
   align-items: center;
 }
@@ -346,7 +347,7 @@ width: 100%;
   color: var(--main-white-color);
 }
 .movie-info--main-info{
-  padding: 50px 80px;
+  padding: 50px 0;
 }
 .main-info--top{
   display: flex;
@@ -422,7 +423,7 @@ width: 100%;
 .main-info--storyline{
 
 }
-.main-info--bottom h4{
+.movie-info h4{
   margin-bottom: 30px;
   text-transform: uppercase;
   font-weight: bold;
@@ -466,5 +467,8 @@ width: 100%;
 }
 .cast--info .cast--character{
   color: var(--main-white-color);
+}
+.movie-info--similar-movies{
+  height: 40vh;
 }
 /* End Movie Info */

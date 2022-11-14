@@ -58,7 +58,7 @@ function Home() {
       <CardsGridAnimation>
         <div className="movies-grid">{cardsElem}</div>
       </CardsGridAnimation>
-    </div> : <h2 style={{textTrasform:'capitalize',color:'var(--main-white-color)',fontSize:'38px',fontWeight:'bold'}}>favorite movies list is empty</h2>
+    </div> : <h2 style={{textTrasform:'capitalize',color:'var(--main-white-color)',fontSize:'30px',fontWeight:'normal'}}>favorite movies list is empty</h2>
   );
 }
 

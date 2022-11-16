@@ -58,6 +58,7 @@ function Categories() {
     const index = elem.index;
     if(pageRef.current !== splideIndexToGenre[index]){
       if (index !== 0) {
+        
         dispatch({type:'genres',payload:{selectedPage:splideIndexToGenre[index],genreToId:genreToIdRef.current}})
       } else {
         setTimeout(() => {

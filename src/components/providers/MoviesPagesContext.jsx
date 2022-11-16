@@ -22,6 +22,8 @@ function reducer(state,action){
         return {apiUrl:`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=1&with_genres=${action.payload.genreToId[action.payload.selectedPage]}`,data:[],selectedPage:action.payload.selectedPage}
     }else if(action.type === ACTIONS.FAVORITE){
         return {apiUrl:null,data:localStorage.getItem('favoriteMovies') ? JSON.parse(localStorage.getItem('favoriteMovies')) : [],selectedPage:action.payload.selectedPage}
+    }else if(action.type === 'anotherPage'){
+        return {apiUrl:null,data:null,selectedPage:''}
     }else{
         throw new Error();
     }

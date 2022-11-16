@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useContext} from 'react'
-import {useParams,useNavigate} from 'react-router-dom'
+import {useParams,useNavigate, Link} from 'react-router-dom'
 import {nanoid} from 'nanoid'
 import {MdFavorite} from 'react-icons/md'
 import {BsFillPlayFill} from 'react-icons/bs'
@@ -10,7 +10,7 @@ function MovieInfo() {
     const {id:movie_id} = useParams();
     const [movieInfo,setMovieInfo] = useState(null);
     const [isFavorite,setIsFavorite] = useState(null);
-    const {spliderRef} = useContext(MoviesPagesContext);
+    const {spliderRef,dispatch} = useContext(MoviesPagesContext);
     const navigate = useNavigate();
     const splideIndexToGenre = {
       1: "Action",
@@ -34,6 +34,7 @@ function MovieInfo() {
       19: "Western",
     };
     useEffect(()=>{
+      dispatch({type:'anotherPage',payload:{}});
       const movieInfoFromLocalStorage = localStorage.getItem(`movie${movie_id}`);
       if(movieInfoFromLocalStorage){
         setMovieInfo(JSON.parse(movieInfoFromLocalStorage))
@@ -61,7 +62,7 @@ function MovieInfo() {
       setMovieInfo({...movieData,'movieCast':castData});
     }
     const castsElem = movieInfo?.movieCast.cast.map((character)=>{
-           return character.profile_path && <MovieCast key={nanoid()} castInfos={character}/>
+           return character.profile_path && <Link key={nanoid()} to={'/actor/'+character.id}><MovieCast castInfos={character}/></Link>
     }).slice(0,6);
     const handleIsFavoriteBtn = ()=>{
       const favoriteMoviesList = localStorage.getItem('favoriteMovies');
@@ -79,7 +80,8 @@ function MovieInfo() {
       setIsFavorite(prevState=>!prevState);
     }
     const genreClickHandler = (genre)=>{
-      navigate('/')
+      dispatch({type:'category',payload:{selectedPage:'home',genreToId:''}});
+      navigate('/');
       let index;
       for(let key of Object.keys(splideIndexToGenre)){
           if(splideIndexToGenre[key] === genre){

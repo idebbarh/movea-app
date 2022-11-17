@@ -170,6 +170,12 @@ a{
   gap: 30px;
   height: 50vh;
 }
+.landing >*:first-child{
+  flex: 0.7;
+}
+.landing >*:last-child{
+  flex: 0.3;
+}
 .landing-movie{
   position: relative;
   height: 100%;
@@ -181,9 +187,9 @@ a{
   overflow: hidden;
 }
 .landing-movie--image img{
-  scale: 102%;
-  max-width: 100%;
+  width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .overlay{
   position: absolute;
@@ -299,15 +305,21 @@ width: 100%;
 /* Start Movie Info */
 .movie-info--header{
   position: relative;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
 }
 .header--movie-big-image{
   position: relative;
   border-radius: 20px;
   overflow: hidden;
+  flex: 1;
 }
 .header--movie-big-image img{
-  max-width: 100%;
-  scale: 102%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
 }
 .header--main-btn{
   position: relative;
@@ -352,9 +364,6 @@ width: 100%;
 .main-info--top{
   display: flex;
   gap: 20px;
-}
-.main-info--movie-small-image{
-
 }
 .main-info--movie-small-image img{
   max-width: 100%;
@@ -420,9 +429,6 @@ width: 100%;
   gap: 30px;
   flex-direction: column;
 }
-.main-info--storyline{
-
-}
 .movie-info h4{
   margin-bottom: 30px;
   text-transform: uppercase;
@@ -432,9 +438,6 @@ width: 100%;
 .main-info--storyline p{
   color: var(--side-bar-text-color);
   line-height: 1.5;
-}
-.main-info--casts{
-
 }
 .main-info--casts .casts-list{
   display: flex;
@@ -468,5 +471,83 @@ width: 100%;
 .cast--info .cast--character{
   color: var(--main-white-color);
 }
-
 /* End Movie Info */
+/* Start Actor Info */
+.actor-info--top{
+  height: fit-content;
+  display: flex;
+  gap: 40px;
+  padding: 80px 0;
+}
+.actor-info--top >*:first-child{
+  flex: 0.3;
+  overflow: hidden;
+  border-radius: 14px;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  -ms-border-radius: 14px;
+  -o-border-radius: 14px;
+}
+.actor-info--top >*:last-child{
+  flex: 0.7;
+}
+.actor-info--image >img{
+  max-width: 100%;
+  border-radius: 14px;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  -ms-border-radius: 14px;
+  -o-border-radius: 14px;
+}
+.actor-info--name{
+  color: var(--main-white-color);
+  font-weight: bold;
+  font-size: 50px;
+}
+.actor-info--date{
+  color: var(--main-white-color);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 20px;
+  padding: 20px 0;
+  text-transform: capitalize;
+}
+.actor-info--bio > p{
+  color: var(--side-bar-text-color);
+  line-height: 1.6;
+  font-size: 18px;
+}
+.actor-info--see-more-btn{
+  background:none;
+  color: var(--main-blue-color);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 18px;
+  text-transform: capitalize;
+}
+.actor-info--imdb-btn{
+  position: relative;
+  color: var(--main-white-color);
+  font-weight: bold;
+  padding: 15px 20px;
+  border-radius: 30px;
+  background: none;
+  border: 1px solid var(--main-blue-color);
+  background-color: var(--main-blue-color);
+  text-transform: uppercase;
+  font-size: 18px;
+  width: 200px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.actor-info--movies > h3{
+  color: var(--main-white-color);
+  font-weight: bold;
+  font-size: 32px;
+}
+/* End Actor Info */

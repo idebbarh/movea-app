@@ -79,7 +79,6 @@ function SideBarLinks() {
           </li>
         </motion.div>
       </Link>
-      {/* localStorage.getItem('favoriteMovies') && JSON.parse(localStorage.getItem('favoriteMovies')).length > 0 &&  */}
       <Link to={"/"}>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
           <li

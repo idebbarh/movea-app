@@ -32,12 +32,7 @@ function Categories() {
   };
   
   useEffect(() => {
-    const categoriesFromLocalStorage = localStorage.getItem("allCategories");
-    if (categoriesFromLocalStorage) {
-      setAllCategories(JSON.parse(categoriesFromLocalStorage));
-    } else {
       getAllCategories();
-    }
   }, []);
 
   useEffect(() => {
@@ -51,7 +46,6 @@ function Categories() {
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     );
     const data = await res.json();
-    localStorage.setItem("allCategories", JSON.stringify(data.genres));
     setAllCategories(data.genres);
   };
   const getSlidePage = async (elem) => {

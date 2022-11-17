@@ -24,7 +24,7 @@ function SimilarMovies(props) {
     <div className="movie-info--similar-movies">
         <h4>more like this</h4>
         <CardsGridAnimation>
-        <div className="movies-grid">{cardsElem}</div>
+          <div className="movies-grid">{cardsElem}</div>
       </CardsGridAnimation>
     </div>
   )

@@ -13,12 +13,7 @@ function Home() {
   const { selectedPage, dataToUse } = useContext(MoviesPagesContext);
   useEffect(() => {
     if(dataToUse.apiUrl !== null){
-      const moviesFromLocalStorage = localStorage.getItem(selectedPage);
-      if (moviesFromLocalStorage) {
-        setMoviesData(JSON.parse(moviesFromLocalStorage));
-      } else {
         fetchMoviesData();
-      }
     }else{
       fetchFavoriteMovies().then(res=>setMoviesData(res))
     }
@@ -26,7 +21,6 @@ function Home() {
   const fetchMoviesData = async () => {
     const res = await fetch(dataToUse.apiUrl);
     const data = await res.json();
-    localStorage.setItem(selectedPage, JSON.stringify(data.results));
     setMoviesData(data.results);
   };
   const fetchFavoriteMovies = async () =>{

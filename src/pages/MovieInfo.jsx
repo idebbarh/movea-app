@@ -35,24 +35,17 @@ function MovieInfo() {
     };
     useEffect(()=>{
       dispatch({type:'anotherPage',payload:{}});
-      const movieInfoFromLocalStorage = localStorage.getItem(`movie${movie_id}`);
-      if(movieInfoFromLocalStorage){
-        setMovieInfo(JSON.parse(movieInfoFromLocalStorage))
-      }else{
-        fetchMovieInfo()
-      }
-    },[movie_id])
-    useEffect(()=>{
-        const favoriteMoviesList = localStorage.getItem('favoriteMovies')
-        if(favoriteMoviesList){
-          if(JSON.parse(favoriteMoviesList).includes(movie_id)){
-            setIsFavorite(true);
-          }else{
-            setIsFavorite(false);
-          }
+      fetchMovieInfo()
+      const favoriteMoviesList = localStorage.getItem('favoriteMovies');
+      if(favoriteMoviesList){
+        if(JSON.parse(favoriteMoviesList).includes(movie_id)){
+          setIsFavorite(true);
         }else{
           setIsFavorite(false);
         }
+      }else{
+        setIsFavorite(false);
+      }
     },[movie_id])
     const fetchMovieInfo = async ()=>{
       const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);

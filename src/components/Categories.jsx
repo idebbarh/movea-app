@@ -5,10 +5,11 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 function Categories() {
   const [allCategories, setAllCategories] = useState([]);
-  const { dispatch,spliderRef,selectedPage,genreToId } =
+  const { dispatch,spliderRef,selectedPage,genreToId,type} =
     useContext(MoviesPagesContext);
   const pageRef = useRef(selectedPage);
-  const genreToIdRef = useRef(genreToId)
+  const genreToIdRef = useRef(genreToId);
+  const typeRef = useRef(type);
   const splideIndexToGenre = {
     1: "Action",
     2: "Adventure",
@@ -41,6 +42,9 @@ function Categories() {
   useEffect(()=>{
     genreToIdRef.current = genreToId;
   },[genreToId])
+  useEffect(()=>{
+    typeRef.current = type;
+  },[type])
   const getAllCategories = async () => {
     const res = await fetch(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
@@ -52,12 +56,11 @@ function Categories() {
     const index = elem.index;
     if(pageRef.current !== splideIndexToGenre[index]){
       if (index !== 0) {
-        
         dispatch({type:'genres',payload:{selectedPage:splideIndexToGenre[index],genreToId:genreToIdRef.current}})
       } else {
         setTimeout(() => {
           if (
-            !["home", "popular", "top rated", "upcoming", "favorite"].includes(
+            !["home", "popular", "top rated", "upcoming", "favorite","search",typeRef.current === 'search' && pageRef.current].includes(
               pageRef.current
             )
           ) {

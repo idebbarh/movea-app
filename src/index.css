@@ -18,6 +18,7 @@ body{
 }
 a{
   text-decoration: none;
+  color: currentColor;
 }
 .all-contents{
   padding-left: 246px;
@@ -68,6 +69,7 @@ a{
   justify-content: flex-end;
 }
 .from--search-input{
+  position: relative;
   border: 1px solid var(--side-bar-text-color);
   padding: 10px;
   border-radius: 20px;
@@ -84,6 +86,51 @@ a{
   border: none;
   outline: none;
   height: 100%;
+}
+.suggest-moves-container{
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 999;
+  background-color: var(--main-background-color);
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  gap: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.suggest-moves-container >*{
+  display: block;
+  padding: 15px;
+  width: 100%;
+  border: 1px solid var(--side-bar-text-color);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius:6px ;
+  -webkit-border-radius:6px ;
+  -moz-border-radius:6px ;
+  -ms-border-radius:6px ;
+  -o-border-radius:6px ;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+.suggest-moves-container >*:hover{
+  color: var(--main-white-color);
+  border-color: var(--main-white-color);
 }
 /* End Header */
 /* Start SideBar */
@@ -444,6 +491,9 @@ width: 100%;
   flex-direction: column;
   gap: 10px;
 }
+.main-info--casts .casts-list > a{
+  width: fit-content;
+}
 .main-info--casts .cast{
   display: flex;
   gap: 8px;
@@ -517,6 +567,9 @@ width: 100%;
   color: var(--side-bar-text-color);
   line-height: 1.6;
   font-size: 18px;
+}
+.actor-info--bio + a{
+  display: inline-block;
 }
 .actor-info--see-more-btn{
   background:none;

@@ -17,17 +17,22 @@ const ACTIONS = {
 
 function reducer(state,action){
     if(action.type === ACTIONS.CATEGOIE){
-        return {apiUrl:apiPerPageCat[action.payload.selectedPage],data:[],selectedPage:action.payload.selectedPage}
+        return {apiUrl:apiPerPageCat[action.payload.selectedPage],data:[],selectedPage:action.payload.selectedPage,action:action.type}
     }else if(action.type === ACTIONS.GENRES){
-        return {apiUrl:`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=1&with_genres=${action.payload.genreToId[action.payload.selectedPage]}`,data:[],selectedPage:action.payload.selectedPage}
+        return {apiUrl:`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=1&with_genres=${action.payload.genreToId[action.payload.selectedPage]}`,data:[],selectedPage:action.payload.selectedPage,action:action.type}
     }else if(action.type === ACTIONS.FAVORITE){
-        return {apiUrl:null,data:localStorage.getItem('favoriteMovies') ? JSON.parse(localStorage.getItem('favoriteMovies')) : [],selectedPage:action.payload.selectedPage}
+        return {apiUrl:null,data:localStorage.getItem('favoriteMovies') ? JSON.parse(localStorage.getItem('favoriteMovies')) : [],selectedPage:action.payload.selectedPage,action:action.type}
     }else if(action.type === 'anotherPage'){
         return {apiUrl:null,data:null,selectedPage:''}
-    }else{
+    }
+    else if(action.type === 'search'){
+        return {apiUrl:`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&page=1&query=${action.payload.selectedPage}`,data:[],selectedPage:action.payload.selectedPage,action:action.type}
+    }
+    else{
         throw new Error();
     }
 }
+
 
 export function ApiProvider({children}){
     const [state,dispatch] = useReducer(reducer,initialState)
@@ -48,7 +53,7 @@ export function ApiProvider({children}){
         fetchGenre()
     },[])
     return (
-        <MoviesPagesContext.Provider value={{dispatch,spliderRef,selectedPage:state['selectedPage'],dataToUse:state,genreToId:genreToId}}>
+        <MoviesPagesContext.Provider value={{dispatch,spliderRef,selectedPage:state['selectedPage'],dataToUse:state,genreToId:genreToId,type:state['action']}}>
             {children}
         </MoviesPagesContext.Provider>
     )

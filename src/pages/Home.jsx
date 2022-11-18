@@ -10,18 +10,19 @@ import CardsGridAnimation from "../components/animation/CardsGridAnimation";
 import SingleCardAnimation from "../components/animation/SingleCardAnimation";
 function Home() {
   const [moviesData, setMoviesData] = useState([]);
-  const { selectedPage, dataToUse } = useContext(MoviesPagesContext);
+  const { selectedPage, dataToUse,type } = useContext(MoviesPagesContext);
   useEffect(() => {
-    if(dataToUse.apiUrl !== null){
+      if(dataToUse.apiUrl !== null){
         fetchMoviesData();
-    }else{
-      fetchFavoriteMovies().then(res=>setMoviesData(res))
-    }
+      }else{
+        fetchFavoriteMovies().then(res=>setMoviesData(res))
+      }
   }, [selectedPage]);
   const fetchMoviesData = async () => {
     const res = await fetch(dataToUse.apiUrl);
     const data = await res.json();
     setMoviesData(data.results);
+
   };
   const fetchFavoriteMovies = async () =>{
     let allMovies = [];
@@ -39,7 +40,6 @@ function Home() {
       </SingleCardAnimation>
     );
   });
-
   return (
     cardsElem.length > 0 ? <div className="main-movies-contents">
       <div className="landing">
@@ -52,7 +52,8 @@ function Home() {
       <CardsGridAnimation>
         <div className="movies-grid">{cardsElem}</div>
       </CardsGridAnimation>
-    </div> : <h2 style={{textTrasform:'capitalize',color:'var(--main-white-color)',fontSize:'30px',fontWeight:'normal'}}>favorite movies list is empty</h2>
+    </div> : (type === 'search' ? <h2 style={{textTrasform:'capitalize',color:'var(--main-white-color)',fontSize:'30px',fontWeight:'normal'}}>No movies that match {selectedPage}.
+Please search for something else</h2> : <h2 style={{textTrasform:'capitalize',color:'var(--main-white-color)',fontSize:'30px',fontWeight:'normal'}}>favorite movies list is empty</h2>)
   );
 }
 

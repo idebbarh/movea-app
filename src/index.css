@@ -6,6 +6,8 @@
   --star-color:#e5aa1b;
   --side-bar-icons-color:#584957;
   --side-bar-text-color:#958d95;
+  --card-background:#1f1d2c;
+  --card-box-shadow:rgba(0 0, 0, 0) 0px 0px 0px 0px;
 }
 *{
   padding: 0;
@@ -14,7 +16,12 @@
 }
 body{
   background-color: var(--main-background-color);
+  transition: background-color 0.3s ease;
   font-family: 'Inter', sans-serif;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
 }
 a{
   text-decoration: none;
@@ -105,6 +112,7 @@ a{
   padding: 20px;
   z-index: 999;
   background-color: var(--main-background-color);
+  transition: background-color 0.3s ease;
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -112,6 +120,10 @@ a{
   -o-border-radius: 6px;
   gap: 10px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
 }
 .suggest-moves-container >*{
   display: block;
@@ -149,11 +161,11 @@ a{
   display: flex;
   flex-direction: column;
   background-color: var(--main-background-color);
-  transition: left 0.3s ease;
-  -webkit-transition: left 0.3s ease;
-  -moz-transition: left 0.3s ease;
-  -ms-transition: left 0.3s ease;
-  -o-transition: left 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
 }
 .side-bar--close-btn{
   position: absolute;
@@ -248,7 +260,7 @@ a{
   color: var(--side-bar-icons-color);
 }
 .link--state-num{
-  color: var(--main-white-color);
+  color: #ffffff;
   background-color: var(--main-blue-color);
   border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -297,7 +309,7 @@ a{
   background-color: rgba(0, 0, 0, 0.342);
 }
 .landing-movie--title{
-  color: var(--main-white-color);
+  color: #ffffff;
   font-weight: bold;
   font-size: 26px;
   position: absolute;
@@ -348,7 +360,7 @@ width: 100%;
   padding: 30px 15px;
   border-radius: 24px;
   text-align: center;
-  opacity: 0.05;
+  opacity: 0.2;
   color: var(--main-white-color);
 }
 .splide__slide.is-visible.is-active .categoris-link{
@@ -371,10 +383,17 @@ width: 100%;
 .movies-grid--movie-card{
   border-radius: 12px;
   overflow: hidden;
-  padding: 5px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  background-color: var(--card-background);
+  box-shadow: var(--card-box-shadow);
+  transition: background-color 0.3s ease;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
 }
 .movie-card--image{
   flex: 1;
@@ -420,12 +439,12 @@ width: 100%;
 }
 .header--main-btn{
   position: relative;
-  color: var(--main-white-color);
+  color: #ffffff;
   font-weight: bold;
   padding: 15px 20px;
   border-radius: 30px;
   background: none;
-  border: 1px solid var(--side-bar-text-color);
+  border: 1px solid #ffffff;
   text-transform: uppercase;
   font-size: 18px;
   width: 200px;
@@ -685,6 +704,11 @@ width: 100%;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  transition: background-color 0.3s ease;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
 }
 .actor-info--movies > h3{
   color: var(--main-white-color);

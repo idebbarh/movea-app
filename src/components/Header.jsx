@@ -22,6 +22,28 @@ function Header() {
             setSuggestMovies([]);
         }
     }, [inputVal]);
+    useEffect(()=>{
+        if(isDark){
+            document.documentElement.style.setProperty('--main-background-color', '#1f1d2c');
+            document.documentElement.style.setProperty('--main-blue-color', '#2384f8');
+            document.documentElement.style.setProperty('--main-white-color', '#eff3ff');
+            document.documentElement.style.setProperty('--card-background', '#1f1d2c');
+            document.documentElement.style.setProperty('--side-bar-icons-color', '#584957');
+            document.documentElement.style.setProperty('--main--glass-blue-color', '#2383f82d');
+            document.documentElement.style.setProperty('--side-bar-text-color', '#958d95');
+            document.documentElement.style.setProperty('--card-box-shadow', 'rgba(0 0, 0, 0) 0px 0px 0px 0px');
+            
+        }else{
+            document.documentElement.style.setProperty('--main-background-color', '#edf3f0');
+            document.documentElement.style.setProperty('--main-blue-color', '#40d391');
+            document.documentElement.style.setProperty('--main-white-color', '#272727');
+            document.documentElement.style.setProperty('--card-background', '#ffffff');
+            document.documentElement.style.setProperty('--side-bar-icons-color', '#c4d3cc');
+            document.documentElement.style.setProperty('--main--glass-blue-color', '#c3f7dc');
+            document.documentElement.style.setProperty('--side-bar-text-color', '#3f3f3f');
+            document.documentElement.style.setProperty('--card-box-shadow', 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px');
+        }
+    },[isDark])
     function switchMode(){
         setIsdark(prevState=>!prevState)
     }

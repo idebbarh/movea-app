@@ -5,7 +5,6 @@ import MoviesPagesContext from "../components/providers/MoviesPagesContext";
 import MovieCard from "../components/MovieCard";
 import LandingMovie from "../components/LandingMovie";
 import Categories from "../components/Categories";
-import { nanoid } from "nanoid";
 import CardsGridAnimation from "../components/animation/CardsGridAnimation";
 import SingleCardAnimation from "../components/animation/SingleCardAnimation";
 function Home() {
@@ -35,7 +34,7 @@ function Home() {
   }
   const cardsElem = moviesData.map((card, index) => {
     return (
-      <SingleCardAnimation key={nanoid()} index={index}>
+      <SingleCardAnimation key={index} index={index}>
         <MovieCard movieData={card} />
       </SingleCardAnimation>
     );
@@ -49,7 +48,7 @@ function Home() {
       <h2 className="section-title">
         {selectedPage === "home" ? "now playing" : selectedPage} movies
       </h2>
-      <CardsGridAnimation>
+      <CardsGridAnimation selectedPage={selectedPage} >
         <div className="movies-grid">{cardsElem}</div>
       </CardsGridAnimation>
     </div> : (type === 'search' ? <h2 style={{textTrasform:'capitalize',color:'var(--main-white-color)',fontSize:'30px',fontWeight:'normal'}}>No movies that match {selectedPage}.

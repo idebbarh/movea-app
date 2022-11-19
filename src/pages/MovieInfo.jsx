@@ -1,6 +1,5 @@
 import React, { useEffect, useState,useContext} from 'react'
 import {useParams,useNavigate, Link} from 'react-router-dom'
-import {nanoid} from 'nanoid'
 import {MdFavorite} from 'react-icons/md'
 import {BsFillPlayFill} from 'react-icons/bs'
 import MovieCast from '../components/MovieCast'
@@ -54,8 +53,8 @@ function MovieInfo() {
       const castData = await castRes.json();
       setMovieInfo({...movieData,'movieCast':castData});
     }
-    const castsElem = movieInfo?.movieCast.cast.map((character)=>{
-           return character.profile_path && <Link key={nanoid()} to={'/actor/'+character.id}><MovieCast castInfos={character}/></Link>
+    const castsElem = movieInfo?.movieCast.cast.map((character,index)=>{
+           return character.profile_path && <Link key={index} to={'/actor/'+character.id}><MovieCast castInfos={character}/></Link>
     }).slice(0,6);
     const handleIsFavoriteBtn = ()=>{
       const favoriteMoviesList = localStorage.getItem('favoriteMovies');
@@ -103,8 +102,8 @@ function MovieInfo() {
           <div className="main-info--infos">
             <h2 className="main-info--movie-title">{movieInfo?.title}</h2>
             <div className="main-info--movie-genres">
-              {movieInfo?.genres.map(genre=>{
-                return (<span className="genre" key={nanoid()} style={{cursor:'pointer'}} onClick={()=>genreClickHandler(genre.name)}>{genre.name}</span>)
+              {movieInfo?.genres.map((genre,index)=>{
+                return (<span className="genre" key={index+100} style={{cursor:'pointer'}} onClick={()=>genreClickHandler(genre.name)}>{genre.name}</span>)
               })}
             </div>
             <div className="main-info--btns">

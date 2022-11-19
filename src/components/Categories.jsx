@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import MoviesPagesContext from "./providers/MoviesPagesContext";
-import { nanoid } from "nanoid";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 function Categories() {
@@ -70,9 +69,9 @@ function Categories() {
       }
   }
   };
-  const catoriesLinksElem = allCategories.map((categ) => {
+  const catoriesLinksElem = allCategories.map((categ,index) => {
     return (
-      <SplideSlide key={nanoid()}>
+      <SplideSlide key={index+1}>
         <div className="categoris-link">{categ.name}</div>
       </SplideSlide>
     );
@@ -101,7 +100,7 @@ function Categories() {
           onActive={(event, elem) => getSlidePage(elem)}
         >
           {[
-            <SplideSlide key={nanoid()}>
+            <SplideSlide key={0}>
               <div className="categoris-link">Select Genre</div>
             </SplideSlide>,
             ...catoriesLinksElem,

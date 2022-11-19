@@ -1,10 +1,9 @@
 import React from 'react'
 import {motion,AnimatePresence} from 'framer-motion'
-import {nanoid} from 'nanoid'
 function SingleCardAnimation({index,children}) {
   return (
     <AnimatePresence mode='wait'>
-        <motion.div key={nanoid()}
+        <motion.div key={index}
                     initial={{ y: 10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -10, opacity: 0 }}

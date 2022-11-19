@@ -1,6 +1,5 @@
-import { nanoid } from "nanoid";
 import React, { useEffect, useState,useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ActorBio from "../components/ActorBio";
 import CardsGridAnimation from "../components/animation/CardsGridAnimation";
 import SingleCardAnimation from "../components/animation/SingleCardAnimation";
@@ -25,7 +24,7 @@ function ActorInfo() {
   };
   const moviesElem = actorData ? actorData?.movies.map((movie,index)=>{
                                 return (
-                                  <SingleCardAnimation key={nanoid()} index={index}>
+                                  <SingleCardAnimation key={index} index={index}>
                                     <MovieCard movieData={movie} />
                                   </SingleCardAnimation>
                                 );

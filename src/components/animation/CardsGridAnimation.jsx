@@ -1,10 +1,9 @@
 import React from 'react'
 import {motion,AnimatePresence} from 'framer-motion'
-import { nanoid } from 'nanoid';
-function CardsGridAnimation({children}) {
+function CardsGridAnimation({selectedPage,children}) {
   return (
     <AnimatePresence mode='wait'>
-        <motion.div key={nanoid()}
+        <motion.div key={selectedPage}
                     exit={{ y: -10, opacity: 0 }}>
             {children}
         </motion.div>

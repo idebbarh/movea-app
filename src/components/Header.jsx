@@ -3,7 +3,6 @@ import React,{ useState,useContext,useRef, useEffect }   from 'react'
 import MoviesPagesContext from './providers/MoviesPagesContext'
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 function Header() {
     const {dispatch,spliderRef} = useContext(MoviesPagesContext);
     const [isDark,setIsdark] = useState(true);
@@ -43,9 +42,9 @@ function Header() {
         })
         setSuggestMovies(moviesNames.slice(0,10));
     }
-    const suggestMoviesElem = suggestMovies.map(movies=>{
+    const suggestMoviesElem = suggestMovies.map((movies,index)=>{
         return (
-            <Link to={`/movie/${movies.id}`} onClick={()=>setInputVal('')} key={nanoid()}><span>{movies.title}</span></Link>
+            <Link to={`/movie/${movies.id}`} onClick={()=>setInputVal('')} key={index}><span>{movies.title}</span></Link>
         )
     })
   return (

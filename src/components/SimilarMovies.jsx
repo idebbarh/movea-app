@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import React,{useState,useEffect} from 'react'
 import MovieCard from './MovieCard';
 import CardsGridAnimation from './animation/CardsGridAnimation';
@@ -15,7 +14,7 @@ function SimilarMovies(props) {
     }
     const cardsElem = similarMovies.map((movie,index)=>{
       return (
-              <SingleCardAnimation key={nanoid()} index={index}>
+              <SingleCardAnimation key={index} index={index}>
                 <MovieCard movieData={movie} />
               </SingleCardAnimation>
             );
@@ -23,7 +22,7 @@ function SimilarMovies(props) {
   return (
     <div className="movie-info--similar-movies">
         <h4>more like this</h4>
-        <CardsGridAnimation>
+        <CardsGridAnimation selectedPage={props.id}>
           <div className="movies-grid">{cardsElem}</div>
       </CardsGridAnimation>
     </div>

@@ -5,11 +5,13 @@ import {BsFillPlayFill} from 'react-icons/bs'
 import MovieCast from '../components/MovieCast'
 import MoviesPagesContext from '../components/providers/MoviesPagesContext'
 import SimilarMovies from '../components/SimilarMovies'
+import MovieTrailer from '../components/MovieTrailer'
 function MovieInfo() {
     const {id:movie_id} = useParams();
     const [movieInfo,setMovieInfo] = useState(null);
     const [isFavorite,setIsFavorite] = useState(null);
     const {spliderRef,dispatch} = useContext(MoviesPagesContext);
+    const [showTrailer,setShowTrailer] = useState(false)
     const navigate = useNavigate();
     const splideIndexToGenre = {
       1: "Action",
@@ -51,7 +53,10 @@ function MovieInfo() {
       const movieData = await res.json();
       const castRes = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
       const castData = await castRes.json();
-      setMovieInfo({...movieData,'movieCast':castData});
+      const trailerRes = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+      const trailerData = await trailerRes.json();
+      console.log(trailerData.results[0])
+      setMovieInfo({...movieData,'movieCast':castData,'trailer':trailerData.results[0]});
     }
     const castsElem = movieInfo?.movieCast.cast.map((character,index)=>{
            return character.profile_path && <Link key={index} to={'/actor/'+character.id}><MovieCast castInfos={character}/></Link>
@@ -85,6 +90,7 @@ function MovieInfo() {
         spliderRef.current.go(parseInt(index));
       },300)
     }
+  
   return (
     <div className='movie-info'>
       <header className="movie-info--header">
@@ -92,7 +98,7 @@ function MovieInfo() {
           <img src={movieInfo !== null ? `https://image.tmdb.org/t/p/original${movieInfo.backdrop_path}` : ''} alt={movieInfo?.title} />
           <div className="overlay"></div>
         </div>
-        <button className="header--main-btn"><BsFillPlayFill className='icon'/>trailer</button>
+        <button className="header--main-btn" onClick={()=>setShowTrailer(true)}><BsFillPlayFill className='icon'/>trailer</button>
       </header>
       <div className="movie-info--main-info">
         <div className="main-info--top">
@@ -107,7 +113,10 @@ function MovieInfo() {
               })}
             </div>
             <div className="main-info--btns">
+            
+            <a href={`https://www.imdb.com/title/${movieInfo?.imdb_id}` } target="_blank">
               <button className="header--main-btn"><BsFillPlayFill className='icon'/>watch</button>
+            </a>
               <button className={`btns--favorite-btn ${isFavorite && 'active'}`} onClick={handleIsFavoriteBtn}><MdFavorite className='favorite-icon'/></button>
             </div>
           </div>
@@ -126,6 +135,7 @@ function MovieInfo() {
           <SimilarMovies id={movie_id}/>
         </div>
       </div>
+      {showTrailer && <MovieTrailer setShowTrailer={setShowTrailer} trailerInfo={movieInfo?.trailer}/>}
     </div>
   )
 }

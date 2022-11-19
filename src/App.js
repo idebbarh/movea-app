@@ -4,11 +4,13 @@ import SideBar from "./components/SideBar";
 import Pages from "./pages/Pages";
 import { BrowserRouter } from "react-router-dom";
 import { ApiProvider } from "./components/providers/MoviesPagesContext";
+import {SideBarProvider} from "./components/providers/SideBarContext";
 
 function App() {
   return (
     <div className="App">
       <ApiProvider>
+      <SideBarProvider>
         <BrowserRouter>
           <div className="all-contents">
             <Header />
@@ -18,6 +20,7 @@ function App() {
           </div>
           <SideBar />
         </BrowserRouter>
+        </SideBarProvider>
       </ApiProvider>
     </div>
   );

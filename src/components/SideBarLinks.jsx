@@ -8,9 +8,13 @@ import { motion } from "framer-motion";
 import { useContext } from "react";
 import MoviesPagesContext from "./providers/MoviesPagesContext";
 import { Link } from "react-router-dom";
+import SideBarContext from "./providers/SideBarContext";
+import useMediaQuery from "../hooks/useMediaQuery";
 function SideBarLinks() {
   const { dispatch, selectedPage, spliderRef } =
     useContext(MoviesPagesContext);
+    const {setIsShowingSideBar} = useContext(SideBarContext);
+  const isSmallScreens = useMediaQuery('(max-width:1024px)');
   const onClickHandler = (index, pageName) => {
     if(pageName !== 'favorite'){
       dispatch({type:'category',payload:{selectedPage:pageName,genreToId:''}});
@@ -19,7 +23,9 @@ function SideBarLinks() {
     }
     if (spliderRef.current) {
       spliderRef.current.go(index);
-      
+    }
+    if(isSmallScreens){
+      setIsShowingSideBar(prevState=>!prevState)
     }
   };
   return (
@@ -89,6 +95,7 @@ function SideBarLinks() {
           >
             <MdFavorite className="link--icon" />
             Favorite
+            <span className="link--state-num">{localStorage.getItem('favoriteMovies') ? JSON.parse(localStorage.getItem('favoriteMovies')).length: 0}</span>
           </li>
         </motion.div>
       </Link>

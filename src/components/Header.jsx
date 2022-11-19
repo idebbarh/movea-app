@@ -3,12 +3,18 @@ import React,{ useState,useContext,useRef, useEffect }   from 'react'
 import MoviesPagesContext from './providers/MoviesPagesContext'
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { AnimatePresence,motion } from 'framer-motion';
+import useMediaQuery from '../hooks/useMediaQuery';
+import {GiHamburgerMenu} from 'react-icons/gi'
+import SideBarContext from './providers/SideBarContext';
 function Header() {
     const {dispatch,spliderRef} = useContext(MoviesPagesContext);
+    const {setIsShowingSideBar} = useContext(SideBarContext);
     const [isDark,setIsdark] = useState(true);
     const [suggestMovies,setSuggestMovies] = useState([]);
     const [inputVal,setInputVal] = useState([]);
     const navigate = useNavigate();
+    const isSmallScreens = useMediaQuery('(max-width:1024px)');
     useEffect(() => {
         if(inputVal.length > 0) {
             fetchSuggestMovies();
@@ -49,6 +55,7 @@ function Header() {
     })
   return (
     <div className='header'>
+        {isSmallScreens && <GiHamburgerMenu className='header--burger-icon' onClick={()=>setIsShowingSideBar(prevState=>!prevState)}/>}
         <div className={`header--mode-switcher ${isDark ? 'dark-mode' : 'light-mode'}`}>
             <h3 className="mode-switcher--hello-text">GoodNight!</h3>
             <div className="mode-switcher--container" onClick={switchMode}>
@@ -61,7 +68,15 @@ function Header() {
             <div className="from--search-input">
                 <BsSearch className='search-input--icon'/>
                 <input value={inputVal} type="text" placeholder='type to search' onChange={(e)=>setInputVal(e.target.value)}/>
-                {suggestMovies.length > 0 && <div className="suggest-moves-container">{suggestMoviesElem}</div>}
+                <AnimatePresence mode='wait'>
+                    {suggestMovies.length > 0 && <motion.div                     
+                                                    initial={{ y: 10, opacity: 0 }}
+                                                    animate={{ y: 0, opacity: 1 }}
+                                                    exit={{ y: -10, opacity: 0 }}
+                                                    className="suggest-moves-container">
+                        {suggestMoviesElem}
+                    </motion.div>}
+                </AnimatePresence>
             </div>
         </form>
     </div>

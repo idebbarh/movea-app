@@ -4,7 +4,6 @@ const SideBarContext = createContext();
 
 export function SideBarProvider({children}) {
     const [isShowingSideBar,setIsShowingSideBar] = useState(false);
-    console.log(isShowingSideBar)
   return (
     <SideBarContext.Provider value={{isShowingSideBar,setIsShowingSideBar}}>
         {children}

@@ -55,7 +55,6 @@ function MovieInfo() {
       const castData = await castRes.json();
       const trailerRes = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
       const trailerData = await trailerRes.json();
-      console.log(trailerData.results[0])
       setMovieInfo({...movieData,'movieCast':castData,'trailer':trailerData.results[0]});
     }
     const castsElem = movieInfo?.movieCast.cast.map((character,index)=>{

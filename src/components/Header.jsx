@@ -1,7 +1,7 @@
 import { BsSearch } from 'react-icons/bs'
 import React,{ useState,useContext,useRef, useEffect }   from 'react'
 import MoviesPagesContext from './providers/MoviesPagesContext'
-import { useNavigate } from 'react-router';
+import { json, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { AnimatePresence,motion } from 'framer-motion';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -10,7 +10,7 @@ import SideBarContext from './providers/SideBarContext';
 function Header() {
     const {dispatch,spliderRef} = useContext(MoviesPagesContext);
     const {setIsShowingSideBar} = useContext(SideBarContext);
-    const [isDark,setIsdark] = useState(true);
+    const [isDark,setIsdark] = useState(localStorage.getItem('darkMode') ? JSON.parse(localStorage.getItem('darkMode')) : true);
     const [suggestMovies,setSuggestMovies] = useState([]);
     const [inputVal,setInputVal] = useState([]);
     const navigate = useNavigate();
@@ -45,7 +45,8 @@ function Header() {
         }
     },[isDark])
     function switchMode(){
-        setIsdark(prevState=>!prevState)
+        setIsdark(prevState=>!prevState);
+        localStorage.setItem('darkMode',!isDark);
     }
     const search = (e)=>{
         e.preventDefault();
